@@ -5,8 +5,10 @@ const bodyParser = require("body-parser");
 const config = require("./config/config");
 const api_routes = require("./api/routes");
 const app = express();
-//configure database 
 
+//configure database 
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/tagsearch', {useNewUrlParser: true, useUnifiedTopology: true});
 
 //configure body parser
 app.use(bodyParser.urlencoded({ extended: false }));
