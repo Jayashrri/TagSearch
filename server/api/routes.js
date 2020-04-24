@@ -1,13 +1,17 @@
 const express = require('express');
 const router = express.Router();
 
-const article = require('./controllers/addArticle');
+const addArticle = require('./controllers/addArticle');
+const getArticle = require('./controllers/getArticle');
 
 router.get('/status',(req,res)=>{
     res.json({msg: "Api running"});
 })
 
-router.get('/newArticle', article.getTags);
-router.post('/newArticle', article.newArticle);
+router.get('/newArticle', addArticle.getTags);
+router.post('/newArticle', addArticle.newArticle);
+
+router.get('/getAllArticles', getArticle.getAllArticles);
+router.get('/getArticle', getArticle.getArticle);
 
 module.exports = router;
