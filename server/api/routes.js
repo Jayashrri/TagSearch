@@ -3,6 +3,7 @@ const router = express.Router();
 
 const addArticle = require('./controllers/addArticle');
 const getArticle = require('./controllers/getArticle');
+const searchArticle = require('./controllers/searchArticle');
 
 router.get('/status',(req,res)=>{
     res.json({msg: "Api running"});
@@ -13,5 +14,7 @@ router.post('/newArticle', addArticle.newArticle);
 
 router.get('/getAllArticles', getArticle.getAllArticles);
 router.get('/getArticle', getArticle.getArticle);
+
+router.get('/searchSuggestions', searchArticle.searchSuggestions);
 
 module.exports = router;
