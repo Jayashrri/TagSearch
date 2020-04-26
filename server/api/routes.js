@@ -12,9 +12,9 @@ router.get('/status',(req,res)=>{
 router.get('/newArticle', addArticle.getTags);
 router.post('/newArticle', addArticle.newArticle);
 
-router.get('/getAllArticles', getArticle.getAllArticles);
-router.get('/getArticle', getArticle.getArticle);
+router.post('/getAllArticles', getArticle.getAllArticles);
+router.post('/getArticle', getArticle.getArticle);
 
-router.get('/searchSuggestions', searchArticle.searchSuggestions);
+router.post('/searchSuggestions', searchArticle.searchSuggestions);
 
 module.exports = router;

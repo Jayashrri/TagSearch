@@ -1,0 +1,5 @@
+<div>
+    <h3 *ngFor="let article of articleList?.data">
+        <a [routerLink]="[ '/article', article._id]">{{article.title}}</a>
+    </h3>
+</div>
