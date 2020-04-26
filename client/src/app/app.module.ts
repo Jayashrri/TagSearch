@@ -7,12 +7,14 @@ import { AppComponent } from './app.component';
 import { ArticleComponent } from './article/article.component';
 import { ArticleService } from './article.service';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { SearchComponent } from './search/search.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ArticleComponent,
-    ArticleListComponent
+    ArticleListComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

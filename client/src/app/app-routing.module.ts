@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { ArticleComponent } from './article/article.component';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { SearchComponent } from './search/search.component';
 
 
 const routes: Routes = [
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: 'list/:tag',
     component: ArticleListComponent
+  },
+  {
+    path: 'search',
+    component: SearchComponent
   }
 ];
 
