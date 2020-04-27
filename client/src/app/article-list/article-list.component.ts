@@ -24,7 +24,6 @@ export class ArticleListComponent implements OnInit {
         }
         this._tag = jsonString.join();
         this._tag = '[' + this._tag + ']';
-        console.log(this._tag);
       });
 
     this._articleListService.getAllArticles(this._tag)

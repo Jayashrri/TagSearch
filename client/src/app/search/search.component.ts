@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit {
 
   public tagList: TagList;
-  public listString: string[];
+  public searchTerm: string;
 
   constructor(private _suggestionService: SuggestionsService, private _router: Router) { }
 
@@ -28,10 +28,6 @@ export class SearchComponent implements OnInit {
       this._suggestionService.getSuggestions(searchString)
         .subscribe(data => {
           this.tagList = data;
-          this.listString = [];
-          data.data.forEach(data => {
-            this.listString.push(data.name.join('&'));
-          });
         },
           error => {
             //TODO: Error handling
@@ -41,6 +37,16 @@ export class SearchComponent implements OnInit {
     else {
       this.tagList = null;
     }
+  }
+
+  onSearch(tagSet: string) {
+    let searchString: string = tagSet.replace(/\s/g, "").split(',').join('&');
+    this._router.navigate(['list', searchString]);
+  }
+
+  onClick(selected: string[], searchBar: any) {
+    this.searchTerm = selected.join(', ');
+    searchBar.focus();
   }
 
 }
