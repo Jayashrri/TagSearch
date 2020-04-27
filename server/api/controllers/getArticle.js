@@ -3,10 +3,14 @@ const Tag = require('../models/Tag.js');
 
 exports.getAllArticles = async (req, res) => {
     try {
-        const tag = req.body.tag;
-
-        const currentTag = await Tag.findOne({ name: tag }).exec();
-        const articles = await Article.find({ _id: { $in: currentTag.articles } }).select('_id title').exec();
+        const tags = JSON.parse(req.body.tag);
+        let tagIds = [];
+        const currentTag = await Tag.find({ name: { $in: tags } }).exec();
+        console.log(currentTag);
+        currentTag.forEach(tag => {
+            tagIds.push(tag._id);
+        });
+        const articles = await Article.find({ tags: { $all: tagIds } }).select('_id title').exec();
         return res.status(200).send({
             success: true,
             data: articles
