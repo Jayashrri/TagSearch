@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit {
 
   public tagList: TagList;
+  public listString: string[];
 
   constructor(private _suggestionService: SuggestionsService, private _router: Router) { }
 
@@ -18,9 +19,19 @@ export class SearchComponent implements OnInit {
 
   onChange(selected: string) {
     if (selected != "") {
-      this._suggestionService.getSuggestions(selected)
+      let jsonString: string[] = selected.replace(/\s/g, "").split(',');
+      for (let i = 0; i < jsonString.length; i++) {
+        jsonString[i] = '"' + jsonString[i] + '"';
+      }
+      let searchString = jsonString.join();
+      searchString = '[' + searchString + ']';
+      this._suggestionService.getSuggestions(searchString)
         .subscribe(data => {
           this.tagList = data;
+          this.listString = [];
+          data.data.forEach(data => {
+            this.listString.push(data.name.join('&'));
+          });
         },
           error => {
             //TODO: Error handling

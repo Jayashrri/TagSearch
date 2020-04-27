@@ -1,6 +1,6 @@
 <div>
     <input type="text" #searchbar (keyup)="onChange(searchbar.value)">
-    <div *ngFor="let tag of tagList?.data">
-        <a [routerLink]="[ '/list', tag.name]">{{tag.name}}</a>
+    <div *ngFor="let tag of tagList?.data; let i=index;">
+        <a [routerLink]="[ '/list', listString[i]]">{{tag.name}}</a>
     </div>
 </div>

@@ -18,7 +18,13 @@ export class ArticleListComponent implements OnInit {
   ngOnInit(): void {
     this._activatedRoute.params
       .subscribe(params => {
-        this._tag = params['tag'];
+        let jsonString: string[] = params['tag'].split('&');
+        for (let i = 0; i < jsonString.length; i++) {
+          jsonString[i] = '"' + jsonString[i] + '"';
+        }
+        this._tag = jsonString.join();
+        this._tag = '[' + this._tag + ']';
+        console.log(this._tag);
       });
 
     this._articleListService.getAllArticles(this._tag)
