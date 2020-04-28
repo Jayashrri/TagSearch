@@ -1,23 +1,32 @@
-<div>
-    <form #article="ngForm" (ngSubmit)="onSubmit(article)">
+<div class="container">
+    <br>
+    <div class="text-center">
+        <h3>Add New Article</h3>
+    </div>
+    <form class="block" #article="ngForm" (ngSubmit)="onSubmit(article)">
+        <label for="title">Title</label>
         <div class="form-group">
-            <label for="title">Title</label>
-            <input name="title" type="text" required ngModel>
+            <input class="form-control" name="title" type="text" autocomplete="off" required ngModel
+                (keyup)="checkValid(article)">
         </div>
+        <label for="body">Body</label>
         <div class="form-group">
-            <label for="body">Body</label>
-            <textarea name="body" required ngModel></textarea>
+            <textarea class="form-control" name="body" rows="8" required ngModel
+                (keyup)="checkValid(article)"></textarea>
         </div>
-        <div>
-            <label for="tags">Tags</label>
-            <input type="text" name="tags" required ngModel (keyup)="onChange(article.value)">
-            <div class="list-group list-group-horizontal">
-                <button type="button" class="list-group-item list-group-item-action" *ngFor="let tag of tagList?.data"
-                    (click)="onClick(tag, article, $event)">
-                    {{tag}}
-                </button>
-            </div>
+        <label for="tags">Tags</label>
+        <div class="form-group">
+            <input class="form-control" type="text" name="tags" autocomplete="off"
+                ngbTooltip="Enter tags separated by commas or select from the existing tags listed below" required
+                ngModel (keyup)="onChange(article.value)">
+            <button type="button" class="btn btn-secondary text-center" *ngFor="let tag of tagList?.data"
+                (click)="onClick(tag, article, $event)">
+                {{tag}}
+            </button>
         </div>
-        <button type="submit" class="btn btn-primary" [disabled]="article.invalid">Add Article</button>
+        <div class="text-center" [ngbTooltip]="(article.invalid) ? 'Required fields are empty' : ''">
+            <button class="text-center" type="submit" class="btn btn-success" [disabled]="article.invalid">Add
+                Article</button>
+        </div>
     </form>
 </div>

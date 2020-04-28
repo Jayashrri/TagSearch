@@ -1,5 +1,12 @@
-<div>
-    <h3 *ngFor="let article of articleList?.data">
-        <a [routerLink]="[ '/article', article._id]">{{article.title}}</a>
-    </h3>
+<div class="container">
+    <br>
+    <div class="text-center">
+        <h3>Search Results</h3>
+    </div>
+    <br>
+    <div class="list-group">
+        <div class="list-group-item list-group-item-action" *ngFor="let article of articleList?.data">
+            <a [routerLink]="[ '/article', article._id]">{{article.title}}</a>
+        </div>
+    </div>
 </div>

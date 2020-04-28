@@ -11,18 +11,21 @@ import { Router } from '@angular/router';
 export class SearchComponent implements OnInit {
 
   public tagList: TagList;
-  public searchTerm: string;
 
   constructor(private _suggestionService: SuggestionsService, private _router: Router) { }
 
   ngOnInit(): void { }
 
-  onChange(selected: string) {
-    if (selected != "") {
-      let jsonString: string[] = selected.replace(/\s/g, "").split(',');
+  onChange(search: any) {
+    if (search.searchBar != "") {
+      let jsonString: string[] = search.searchBar.replace(/\s/g, "").replace(/,(?=,)/g, '').split(',');
       for (let i = 0; i < jsonString.length; i++) {
         jsonString[i] = '"' + jsonString[i] + '"';
       }
+      if (jsonString[jsonString.length - 1] == '""') {
+        jsonString.pop();
+      }
+
       let searchString = jsonString.join();
       searchString = '[' + searchString + ']';
       this._suggestionService.getSuggestions(searchString)
@@ -39,14 +42,21 @@ export class SearchComponent implements OnInit {
     }
   }
 
-  onSearch(tagSet: string) {
-    let searchString: string = tagSet.replace(/\s/g, "").split(',').join('&');
-    this._router.navigate(['list', searchString]);
+  onSearch(searchBar: any) {
+    let searchString: string = searchBar.value.replace(/\s/g, "").split(',').join('&');
+    if (searchString != "") {
+      this._router.navigate(['list', searchString]);
+    }
   }
 
   onClick(selected: string[], searchBar: any) {
-    this.searchTerm = selected.join(', ');
+    searchBar.value = selected.join(', ');
     searchBar.focus();
+  }
+
+  checkEmpty() {
+    if (this.tagList && this.tagList.data.length == 0)
+      return true;
   }
 
 }

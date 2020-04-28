@@ -1,8 +1,22 @@
-<div>
-    <input type="text" value="{{searchTerm}}" #searchBar (keyup)="onChange(searchBar.value)">
-    <button type="submit" (click)="onSearch(searchBar.value)">Search</button>
-
-    <div *ngFor="let tag of tagList?.data" (click)="onClick(tag.name, searchBar)">
-       <p>{{tag.name.join(', ')}}</p>
+<div class="container">
+    <br>
+    <br>
+    <div class="text-center">
+        <h3>Search Articles by Tags</h3>
     </div>
+    <form class="text-center" #search="ngForm" (ngSubmit)="onSearch(searchBar)">
+        <div class="form-group">
+            <input #searchBar required type="text" autocomplete="off" ngModel name="searchBar"
+                (keyup)="onChange(search.value)">
+            <button type="submit" class="btn btn-success" [disabled]="checkEmpty()">Search</button>
+        </div>
+    </form>
+    <div class="alert alert-danger" *ngIf="checkEmpty()">No articles found</div>
+    <ul class="list-group">
+        <li class="list-group-item list-group-item-action" *ngFor="let tag of tagList?.data"
+            (click)="onClick(tag.name, searchBar)">
+            {{tag.name.join(', ')}}
+        </li>
+    </ul>
+
 </div>

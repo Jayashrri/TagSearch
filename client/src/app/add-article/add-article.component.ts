@@ -49,6 +49,25 @@ export class AddArticleComponent implements OnInit {
     }
   }
 
+  checkValid(article: any) {
+    let formFields = {
+      title: article.value.title.trim(),
+      body: article.value.body.trim(),
+      tags: article.value.tags.trim()
+    };
+
+    if (formFields.title == "") {
+      article.form.controls['title'].setErrors({ 'incorrect': true });
+    } else {
+      article.form.controls['title'].setErrors(null);
+    }
+    if (formFields.body == "") {
+      article.form.controls['body'].setErrors({ 'incorrect': true });
+    } else {
+      article.form.controls['body'].setErrors(null);
+    }
+  }
+
   onSubmit(article: any) {
     if (article.valid) {
       for (let i = 0; i < this.addedTags.length; i++) {
@@ -62,6 +81,7 @@ export class AddArticleComponent implements OnInit {
         tags: currentTags
       })
         .subscribe(data => {
+          this._router.navigate(['']);
         },
           error => {
           }

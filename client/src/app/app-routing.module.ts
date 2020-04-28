@@ -16,7 +16,7 @@ const routes: Routes = [
     component: ArticleListComponent
   },
   {
-    path: 'search',
+    path: '',
     component: SearchComponent
   },
   {
