@@ -1,0 +1,23 @@
+<div>
+    <form #article="ngForm" (ngSubmit)="onSubmit(article)">
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input name="title" type="text" required ngModel>
+        </div>
+        <div class="form-group">
+            <label for="body">Body</label>
+            <textarea name="body" required ngModel></textarea>
+        </div>
+        <div>
+            <label for="tags">Tags</label>
+            <input type="text" name="tags" required ngModel (keyup)="onChange(article.value)">
+            <div class="list-group list-group-horizontal">
+                <button type="button" class="list-group-item list-group-item-action" *ngFor="let tag of tagList?.data"
+                    (click)="onClick(tag, article, $event)">
+                    {{tag}}
+                </button>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="article.invalid">Add Article</button>
+    </form>
+</div>

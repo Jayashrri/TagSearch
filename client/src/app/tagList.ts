@@ -4,6 +4,11 @@ interface tag {
 };
 
 export interface TagList {
-    success: boolean,
+    success: boolean;
     data: tag[];
-}
+};
+
+export interface AllTags {
+    success: boolean;
+    data: string[];
+};

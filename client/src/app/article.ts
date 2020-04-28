@@ -6,3 +6,9 @@ export interface Article {
         body: string;
     }
 };
+
+export interface NewArticle {
+    title: string;
+    body: string;
+    tags: string;
+};
